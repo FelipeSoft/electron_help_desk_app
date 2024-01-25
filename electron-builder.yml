@@ -1,0 +1,7 @@
+appId: com.example.my-electron-next-app
+directories:
+  output: out
+extends:
+  - '@electron-forge/maker-linux'
+  - '@electron-forge/maker-mac'
+  - '@electron-forge/maker-win'
