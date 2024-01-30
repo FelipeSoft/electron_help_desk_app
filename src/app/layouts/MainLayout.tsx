@@ -38,7 +38,7 @@ const MainLayout = ({ children, section }: Props) => {
                     <Modal
                         title={"Novo Chamado"}
                         panel={
-                            <div className="flex flex-col gap-4 mt-8">
+                            <div className="flex flex-col gap-8 mt-8">
                                 <Input
                                     icon={<BadgeCheck className="absolute group-focus-within:text-blue-500 text-gray-400 right-6 top-10" />}
                                     allows="text"
