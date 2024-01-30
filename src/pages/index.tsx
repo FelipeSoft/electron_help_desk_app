@@ -1,4 +1,11 @@
-import { Check, CheckCheck, ChevronDown, ChevronLeft, Cog, Eye, Filter, Flag, Goal, HardDrive, LayoutDashboard, Pause, Play, PlusCircle } from "lucide-react"
+import { 
+    Check, CheckCheck, 
+    ChevronLeft, Cog, 
+    Eye, Filter, Flag, 
+    Goal, HardDrive, 
+    LayoutDashboard, 
+    Pause, Play, PlusCircle 
+} from "lucide-react"
 import Link from "next/link"
 
 const Index = () => {
@@ -20,7 +27,7 @@ const Index = () => {
             </aside>
             <div className="w-3/4 absolute right-0 overflow-y">
                 <header className="bg-white border-b py-8 px-24 text-black flex items-center justify-between gap-8">
-                    <h3 className="font-semibold">TH Soluções</h3>
+                    <h3 className="font-semibold">Nome do Cliente</h3>
                     <div className="flex items-center gap-4">
                         <button className="rounded-lg font-semibold h-12 px-8 bg-blue-500 text-white transition-all hover:-translate-x-2 hover:shadow-xl flex items-center gap-4"><PlusCircle /> Novo Chamado</button>
                     </div>

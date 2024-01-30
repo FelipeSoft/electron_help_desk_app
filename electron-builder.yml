@@ -1,4 +1,4 @@
-appId: com.example.my-electron-next-app
+appId: com.example.th-help-desk-ui
 directories:
   output: out
 extends:
