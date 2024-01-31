@@ -7,10 +7,11 @@ interface SelectProps {
     label: string;
     id: string;
     flexible?: boolean;
+    canShowDefaultIcon: boolean;
     onOptionSelect: (selectedOption: string | React.ReactNode) => void;
 }
 
-export const Select: React.FC<SelectProps> = ({ label, id, options, placeholder, flexible, onOptionSelect }) => {
+export const Select: React.FC<SelectProps> = ({ label, id, options, placeholder, flexible, canShowDefaultIcon, onOptionSelect }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [selectedOption, setSelectedOption] = useState<string | React.ReactNode | null>(null);
     const [focusedIndex, setFocusedIndex] = useState<number | null>(null);
@@ -90,11 +91,12 @@ export const Select: React.FC<SelectProps> = ({ label, id, options, placeholder,
           transition-all outline-none font-semibold 
           text-sm text-blue-500 w-full
           h-12 px-6 py-3
-          border rounded-md cursor-pointer flex items-center justify-between gap-2 border-gray-300`}
+          border rounded-md cursor-pointer flex items-center justify-between gap-2 border-blue-300`}
                 onClick={toggleSelect}
             >
-                <div className={`${selectedOption === placeholder ? '' : ''}`}>
-                    {<Filter className='text-blue-500' />}
+                <div>
+                    {canShowDefaultIcon && <Filter className='text-blue-500' />}
+                    {!canShowDefaultIcon && selectedOption}
                 </div>
                 <div>{isOpen ? <ChevronUp className='text-blue-500' /> : <ChevronDown className='text-blue-500' />}</div>
             </div>

@@ -145,6 +145,7 @@ export const Table = ({ callback, selectable, columns, data, filterables }: Prop
                                 {filterables.map((element) => {
                                     return (
                                         <Select
+                                            canShowDefaultIcon={canShowFilterIcon}
                                             options={element.values}
                                             placeholder={""}
                                             label={""}
@@ -171,7 +172,7 @@ export const Table = ({ callback, selectable, columns, data, filterables }: Prop
                                 <button onClick={() => {
                                     setFilteredData(data)
                                     setCanShowFilterIcon(true)
-                                }} className={`text-white h-12 w-12 h-12 rounded-lg bg-blue-500 flex transition-all items-center justify-center hover:bg-blue-600`} aria-label="Limpar Filtros"><X /></button>
+                                }} className={`text-white h-12 w-12 rounded-lg bg-blue-500 flex transition-all items-center justify-center hover:bg-blue-600`} aria-label="Limpar Filtros"><X /></button>
                             </div>
                         </div>
                         {filteredData.length > 0

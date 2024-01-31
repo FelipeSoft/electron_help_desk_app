@@ -2,8 +2,9 @@ import { Button } from "@/components/Button";
 import { ImageUploader } from "@/components/ImageUploader";
 import { Input } from "@/components/Input";
 import { Modal } from "@/components/Modal";
-import { Badge, BadgeCheck, Book, BookMarked, Cog, Flag, HardDrive, LayoutDashboard, ListCollapse, ListEnd, ListX, PlusCircle } from "lucide-react";
+import { BadgeCheck, Cog, HardDrive, LayoutDashboard, ListCollapse, PlusCircle } from "lucide-react";
 import Link from "next/link";
+import { useState } from "react";
 
 type Props = {
     children: React.ReactNode;
@@ -11,6 +12,8 @@ type Props = {
 }
 
 const MainLayout = ({ children, section }: Props) => {
+    const [enableTicketModal, setEnableTicketModal] = useState(false);
+
     return (
         <div className="w-screen flex">
             <aside className="min-h-screen fixed border-r w-1/4 p-8 bg-white flex flex-col justify-between">
@@ -30,12 +33,14 @@ const MainLayout = ({ children, section }: Props) => {
                 <header className="bg-white border-b py-8 px-24 text-black flex items-center justify-between gap-8">
                     <h3 className="font-semibold">Nome do Cliente</h3>
                     <div className="flex items-center gap-4">
-                        <button className="rounded-lg font-semibold h-12 px-8 bg-blue-500 text-white transition-all hover:-translate-x-2 hover:shadow-xl flex items-center gap-4"><PlusCircle /> Novo Chamado</button>
+                        <button onClick={() => setEnableTicketModal(true)} className="rounded-lg font-semibold h-12 px-8 bg-blue-500 text-white transition-all hover:-translate-x-2 hover:shadow-xl flex items-center gap-4"><PlusCircle /> Novo Chamado</button>
                     </div>
                 </header>
                 <main className="bg-gray-100 h-full py-12 px-24">
                     {children}
                     <Modal
+                        onClose={() => setEnableTicketModal(false)}
+                        visibility={enableTicketModal}
                         title={"Novo Chamado"}
                         panel={
                             <div className="flex flex-col gap-8 mt-8">
@@ -56,19 +61,22 @@ const MainLayout = ({ children, section }: Props) => {
                                     assistantMessage={`Por favor, forneça o máximo de detalhes possível para que possamos atender sua solicitação da melhor maneira. Inclua informações relevantes e quando possível imagens e fotografias.`}
                                 />
                                 <ImageUploader />
-                                <div className="flex items-center justify-end gap-4 mt-6">
-                                    <Button
-                                        label="Cancelar"
-                                        type="secondary"
-                                        onClick={() => ""}
-                                        flexible={false}
-                                    />
-                                    <Button
-                                        label="Abrir"
-                                        type="primary"
-                                        onClick={() => ""}
-                                        flexible={false}
-                                    />
+                                <div className="flex items-center flex-row-reverse justify-between w-full mt-6">
+                                    <div className="flex items-center justify-end gap-4">
+                                        <Button
+                                            label="Cancelar"
+                                            type="secondary"
+                                            onClick={() => setEnableTicketModal(false)}
+                                            flexible={false}
+                                        />
+                                        <Button
+                                            label="Abrir"
+                                            type="primary"
+                                            onClick={() => ""}
+                                            flexible={false}
+                                        />
+                                    </div>
+                                    <Link href="/" className="text-blue-500 text-sm">Está com problemas?</Link>
                                 </div>
                             </div>
                         }
