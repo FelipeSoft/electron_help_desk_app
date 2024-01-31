@@ -27,17 +27,17 @@ export const ImageUploader = () => {
 
     return (
         <div className="flex flex-col gap-2">
-            <label className={`flex flex-col items-center justify-center focus-within:border-blue-500 outline-none w-full h-36 border-2 border-dashed rounded-lg p-6 ${image && "border-none p-0"}`}>
-                <input ref={fileInputRef} type="file" className="opacity-0" onChange={handleChooseImage} />
+            <label className={`flex flex-col items-center justify-center focus-within:border-blue-500 outline-none w-full h-48 border-2 border-dashed rounded-lg ${image && "border-none"}`}>
+                <input ref={fileInputRef} type="file" className="h-4 opacity-0" onChange={handleChooseImage} />
                 {!image ? (
                     <>
                         <Image strokeWidth={1} className="text-blue-500 w-20 h-20" />
                         <h2 className="text-slate-700 font-semibold">Selecione uma <span className="text-blue-500 font-semibold">imagem</span> ou <span className="text-blue-500 font-semibold">fotografia</span>.</h2>
-                        <small className="text-xs text-gray-500">Extensões compatíveis: JPG, JPEG e PNG</small>
+                        <small className="text-xs text-gray-500 pb-4">Extensões compatíveis: JPG, JPEG e PNG</small>
                     </>
                 ) : (
-                    <div className="h-36 w-full rounded-lg relative">
-                        <img src={image} className="h-36 w-full object-cover rounded-lg" alt="" />
+                    <div className="h-48 w-full rounded-lg relative">
+                        <img src={image} className="h-48 w-full object-cover rounded-lg" alt="" />
                         <button onClick={(e) => {
                             e.preventDefault()
                             handleRemoveImage()

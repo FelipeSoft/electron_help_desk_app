@@ -1,12 +1,12 @@
 import MainLayout from "@/app/layouts/MainLayout"
 import { Table } from "@/components/Table"
-import { Check, Eye, EyeIcon, Goal, Pause, Play } from "lucide-react"
+import { Check, EyeIcon, Goal, Pause, Play } from "lucide-react"
 import Link from "next/link"
 
 const Index = () => {
-    const chooseTicket = () => {
+    const chooseTicket = (key: number) => {
 
-    }
+    }   
 
     return (
         <MainLayout section={0}>
@@ -59,7 +59,7 @@ const Index = () => {
                     <Table
                         filterables={[{ key: "Status", values: ["Em Andamento", "Suspenso", "Fechado"] }]}
                         selectable={true}
-                        callback={chooseTicket}
+                        callback={(key) => chooseTicket(key)}
                         columns={["Nº", "Status", "Descrição", "Operador", "Última Atualização", ""]}
                         data={[
                             { id: "1", status: "Em Andamento", description: "Desenvolvimento do Helpdesk", operator: "Felipe", lastUpdate: "10 minutos", actions: <EyeIcon /> },

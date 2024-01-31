@@ -13,6 +13,15 @@ type Props = {
 
 const MainLayout = ({ children, section }: Props) => {
     const [enableTicketModal, setEnableTicketModal] = useState(false);
+    const [input, setInput] = useState({ subject: "", description: "" });
+    const [canValidate, setCanValidate] = useState(false);
+
+    const submit = () => {
+        const hasError = document.querySelectorAll("div.input small.error-message");
+        if (hasError.length === 0) {
+            
+        }
+    }
 
     return (
         <div className="w-screen flex">
@@ -45,6 +54,10 @@ const MainLayout = ({ children, section }: Props) => {
                         panel={
                             <div className="flex flex-col gap-8 mt-8">
                                 <Input
+                                    required
+                                    canValidate={canValidate}
+                                    onChange={(e) => setInput((prevInput) => ({ ...prevInput, subject: e.target.value }))}
+                                    typed={input.subject}
                                     icon={<BadgeCheck className="absolute group-focus-within:text-blue-500 text-gray-400 right-6 top-10" />}
                                     allows="text"
                                     htmlFor="description"
@@ -53,11 +66,16 @@ const MainLayout = ({ children, section }: Props) => {
                                     assistantMessage={`Informe brevemente o motivo, como "Problemas com...", "Dúvida sobre..." ou qualquer outra coisa.`}
                                 />
                                 <Input
+                                    required
+                                    canValidate={canValidate}
+                                    onChange={(e) => setInput((prevInput) => ({ ...prevInput, description: e.target.value }))}
+                                    typed={input.description}
                                     icon={<ListCollapse className="absolute group-focus-within:text-blue-500 text-gray-400 right-6 top-10" />}
                                     allows="textarea"
                                     htmlFor="subject"
                                     label="Descrição"
                                     type="text"
+                                    className="-mt-1.5"
                                     assistantMessage={`Por favor, forneça o máximo de detalhes possível para que possamos atender sua solicitação da melhor maneira. Inclua informações relevantes e quando possível imagens e fotografias.`}
                                 />
                                 <ImageUploader />
@@ -66,13 +84,20 @@ const MainLayout = ({ children, section }: Props) => {
                                         <Button
                                             label="Cancelar"
                                             type="secondary"
-                                            onClick={() => setEnableTicketModal(false)}
+                                            onClick={() => {
+                                                setCanValidate(false);
+                                                setInput({ subject: "", description: "" })
+                                                setEnableTicketModal(false)
+                                            }}
                                             flexible={false}
                                         />
                                         <Button
                                             label="Abrir"
                                             type="primary"
-                                            onClick={() => ""}
+                                            onClick={() => {
+                                                setCanValidate(true)
+                                                submit()
+                                            }}
                                             flexible={false}
                                         />
                                     </div>
