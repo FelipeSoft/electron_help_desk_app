@@ -19,7 +19,7 @@ const MainLayout = ({ children, section }: Props) => {
     const submit = () => {
         const hasError = document.querySelectorAll("div.input small.error-message");
         if (hasError.length === 0) {
-            
+
         }
     }
 
@@ -48,6 +48,7 @@ const MainLayout = ({ children, section }: Props) => {
                 <main className="bg-gray-100 h-full py-12 px-24">
                     {children}
                     <Modal
+                        size="max-w-2xl"
                         onClose={() => setEnableTicketModal(false)}
                         visibility={enableTicketModal}
                         title={"Novo Chamado"}

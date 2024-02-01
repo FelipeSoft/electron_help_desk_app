@@ -10,7 +10,8 @@ const config: Config = {
     extend: {
       animation: {
         "fade-up": "fade-up 0.5s ease-in-out",
-        "fade-down": "fade-down 0.5s ease-in-out"
+        "fade-down": "fade-down 0.5s ease-in-out",
+        "progress": "progress 10s linear "
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

@@ -5,10 +5,11 @@ type Props = {
     title: string;
     panel: React.ReactNode;
     visibility: boolean;
+    size: "max-w-2xl" | "max-w-4xl" | "max-w-6xl" | "max-w-8xl"
     onClose: () => void;
 };
 
-export const Modal = ({ title, panel, visibility, onClose }: Props) => {
+export const Modal = ({ title, panel, visibility, size, onClose }: Props) => {
     const modalRef = useRef<HTMLDivElement | null>(null);
     const [visible, setVisible] = useState(visibility);
 
@@ -34,11 +35,11 @@ export const Modal = ({ title, panel, visibility, onClose }: Props) => {
             className={`
             ${visibility ? "animate-fade-up" : "animate-fade-down"}
             ${visible ? "block" : "hidden"}
-            overflow-y-auto bg-white/50 w-screen h-screen fixed z-40 inset-0 transition-all lg:p-28
+            overflow-y-auto bg-white/50 w-screen h-screen fixed z-40 inset-0 transition-all lg:p-14
             `}
         >
             <section
-                className="bg-white w-full lg:max-w-2xl mx-auto shadow-2xl h-full rounded-2xl p-12 overflow-y-auto"
+                className={`bg-white w-full ${size} mx-auto shadow-2xl h-full rounded-2xl p-12 overflow-y-auto`}
                 ref={modalRef}
             >
                 <div className="w-full flex items-center justify-between">

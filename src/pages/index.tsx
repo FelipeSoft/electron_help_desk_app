@@ -1,15 +1,67 @@
 import MainLayout from "@/app/layouts/MainLayout"
+import { Modal } from "@/components/Modal"
+import { SnackBar } from "@/components/SnackBar"
 import { Table } from "@/components/Table"
 import { Check, EyeIcon, Goal, Pause, Play } from "lucide-react"
 import Link from "next/link"
+import { useState } from "react"
+
+type Ticket = {
+    id: number,
+    status: string,
+    subject: string,
+    description: string,
+    operator: string,
+    lastUpdate: string,
+    actions: React.ReactElement | null
+}
 
 const Index = () => {
-    const chooseTicket = (key: number) => {
+    const [tickets, setTickets] = useState<Ticket[]>([
+        { id: 123, status: "Em Andamento", subject: "Programação", description: "Desenvolvimento do Helpdesk", operator: "Felipe", lastUpdate: "10 minutos", actions: <EyeIcon /> },
+        { id: 2, status: "Em Andamento", subject: "Programação", description: "Desenvolvimento do Helpdesk", operator: "Felipe", lastUpdate: "10 minutos", actions: <EyeIcon /> },
+        { id: 3, status: "Em Andamento", subject: "Programação", description: "Desenvolvimento do Helpdesk", operator: "Felipe", lastUpdate: "10 minutos", actions: <EyeIcon /> },
+        { id: 4, status: "Em Andamento", subject: "Programação", description: "Desenvolvimento do Helpdesk", operator: "Felipe", lastUpdate: "10 minutos", actions: <EyeIcon /> },
+        { id: 5, status: "Em Andamento", subject: "Programação", description: "Desenvolvimento do Helpdesk", operator: "Felipe", lastUpdate: "10 minutos", actions: <EyeIcon /> },
+        { id: 6, status: "Em Andamento", subject: "Programação", description: "Desenvolvimento do Helpdesk", operator: "Felipe", lastUpdate: "10 minutos", actions: <EyeIcon /> }
+    ]);
 
-    }   
+    const [modalInformations, setModalInformations] = useState<Ticket>({ id: 0, status: "", subject: "", description: "", operator: "", lastUpdate: "", actions: null })
+    const [modalVisibility, setModalVisibility] = useState(false);
+
+    const chooseTicket = (key: number) => {
+        setModalVisibility(true);
+        setModalInformations({
+            id: tickets[key].id,
+            status: tickets[key].status,
+            actions: tickets[key].actions,
+            subject: tickets[key].subject,
+            description: tickets[key].description,
+            lastUpdate: tickets[key].lastUpdate,
+            operator: tickets[key].operator,
+        });
+        console.log(tickets[key]);
+    }
 
     return (
         <MainLayout section={0}>
+            <Modal
+                size="max-w-8xl"
+                onClose={() => setModalVisibility(false)}
+                panel={
+                    <div>
+                        <h2>{modalInformations.subject}</h2>
+                        <p>{modalInformations.description}</p>
+                    </div>
+                }
+                title={`Chamado Nº ${modalInformations.id}`}
+                visibility={modalVisibility}
+            />
+            <SnackBar
+                enable={modalVisibility}
+                type="success"
+                message="Esta é uma mensagem de sucesso."
+            />
             <h1 className="text-3xl font-bold mb-4">Dashboard</h1>
             <div className="flex items-center gap-4">
                 <Link href="/" className="bg-blue-500 text-white h-56 hover:-translate-y-1 transition-all shadow-xl w-full border-4 flex items-center justify-between border-blue-500 rounded-lg p-4">
@@ -61,14 +113,7 @@ const Index = () => {
                         selectable={true}
                         callback={(key) => chooseTicket(key)}
                         columns={["Nº", "Status", "Descrição", "Operador", "Última Atualização", ""]}
-                        data={[
-                            { id: "1", status: "Em Andamento", description: "Desenvolvimento do Helpdesk", operator: "Felipe", lastUpdate: "10 minutos", actions: <EyeIcon /> },
-                            { id: "2", status: "Em Andamento", description: "Desenvolvimento do Helpdesk", operator: "Felipe", lastUpdate: "10 minutos", actions: <EyeIcon /> },
-                            { id: "3", status: "Em Andamento", description: "Desenvolvimento do Helpdesk", operator: "Felipe", lastUpdate: "10 minutos", actions: <EyeIcon /> },
-                            { id: "4", status: "Em Andamento", description: "Desenvolvimento do Helpdesk", operator: "Felipe", lastUpdate: "10 minutos", actions: <EyeIcon /> },
-                            { id: "5", status: "Em Andamento", description: "Desenvolvimento do Helpdesk", operator: "Felipe", lastUpdate: "10 minutos", actions: <EyeIcon /> },
-                            { id: "6", status: "Em Andamento", description: "Desenvolvimento do Helpdesk", operator: "Felipe", lastUpdate: "10 minutos", actions: <EyeIcon /> }
-                        ]}
+                        data={tickets}
                     />
                 </section>
             </div>

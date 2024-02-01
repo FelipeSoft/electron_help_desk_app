@@ -55,3 +55,13 @@ html {
     transform: translateY(20px);
   }
 }
+
+@keyframes progress {
+  from {
+    width: 0;
+  }
+
+  to {
+    width: 100%
+  }
+}
