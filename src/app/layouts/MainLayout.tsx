@@ -1,7 +1,9 @@
 import { Button } from "@/components/Button";
+import { ChatBot } from "@/components/ChatBot";
 import { ImageUploader } from "@/components/ImageUploader";
 import { Input } from "@/components/Input";
 import { Modal } from "@/components/Modal";
+import TicketGateway from "@/gateways/ticket.gateway";
 import { BadgeCheck, Cog, HardDrive, LayoutDashboard, ListCollapse, PlusCircle } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
@@ -16,10 +18,14 @@ const MainLayout = ({ children, section }: Props) => {
     const [input, setInput] = useState({ subject: "", description: "" });
     const [canValidate, setCanValidate] = useState(false);
 
-    const submit = () => {
+    const submit = async () => {
         const hasError = document.querySelectorAll("div.input small.error-message");
         if (hasError.length === 0) {
-
+            const server = new TicketGateway()
+            await server.open({
+                title: input.subject,
+                description: input.description
+            })
         }
     }
 
@@ -46,6 +52,7 @@ const MainLayout = ({ children, section }: Props) => {
                     </div>
                 </header>
                 <main className="bg-gray-100 h-full py-12 px-24">
+                    {/* <ChatBot/> */}
                     {children}
                     <Modal
                         size="max-w-2xl"
